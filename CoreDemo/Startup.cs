@@ -1,3 +1,8 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using CoreLayer.Entities.Abstract;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +28,9 @@ namespace CoreDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<IBlogDal, EfBlogDal>();
+            //services.AddScoped<IBlogService, BlogManager>();
+
             services.AddControllersWithViews();
         }
 
