@@ -23,8 +23,14 @@ namespace CoreDemo.Controllers
         public IActionResult Index()
         {
             //var blogList = _blogService.GetAll(); 
-            var blogList = bm.GetAll();         
+            var blogList = bm.GetBlogListWithCategory();         
             return View(blogList);
+        }
+
+        public IActionResult BlogDetails(int id)
+        {
+            var values = bm.GetBlogByID(id);
+            return View(values);
         }
     }
 }
