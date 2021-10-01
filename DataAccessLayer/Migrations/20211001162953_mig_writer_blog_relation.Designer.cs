@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20211001162953_mig_writer_blog_relation")]
+    partial class mig_writer_blog_relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,7 +79,10 @@ namespace DataAccessLayer.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("WriterId")
+                    b.Property<int?>("WriterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WrtierId")
                         .HasColumnType("int");
 
                     b.HasKey("BlogId");
@@ -218,9 +223,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasOne("EntityLayer.Concrete.Writer", "Writer")
                         .WithMany("Blogs")
-                        .HasForeignKey("WriterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WriterId");
 
                     b.Navigation("Category");
 
