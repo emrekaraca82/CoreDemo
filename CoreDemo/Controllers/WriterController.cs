@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
 {
-    [AllowAnonymous]
+    
     public class WriterController : Controller
     {
         public IActionResult Index()

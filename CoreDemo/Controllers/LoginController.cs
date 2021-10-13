@@ -1,11 +1,13 @@
 ﻿using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
@@ -19,20 +21,27 @@ namespace CoreDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Writer par)
+
+        public async Task<IActionResult> Index(Writer par)
         {
             Context c = new Context();
             var data = c.Writers.FirstOrDefault(x => x.WriterEmail == par.WriterEmail && x.WriterPassword == par.WriterPassword);
-            if(data != null)
+            if (data != null)
             {
-                HttpContext.Session.SetString("username", par.WriterEmail);
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name,par.WriterEmail)
+                };
+                var useridentity = new ClaimsIdentity(claims, "a");
+                ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(principal);
                 return RedirectToAction("Index", "Writer");
             }
             else
             {
                 return View();
             }
-            
         }
+
     }
 }
