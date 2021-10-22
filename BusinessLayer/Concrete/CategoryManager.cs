@@ -18,14 +18,14 @@ namespace BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void Add(Category category)
+        public void Add(Category par)
         {
-            _categoryDal.Insert(category);
+            _categoryDal.Insert(par);
         }
 
-        public void Delete(Category category)
+        public void Delete(Category par)
         {
-            _categoryDal.Delete(category);
+            _categoryDal.Delete(par);
         }
 
         public List<Category> GetAll()
@@ -33,14 +33,14 @@ namespace BusinessLayer.Concrete
             return _categoryDal.List();
         }
 
-        public Category GetById(int categoryId)
+        public Category GetById(int id)
         {
-            return _categoryDal.Get(x => x.CategoryId == categoryId);
+            return _categoryDal.Get(x => x.CategoryId == id);
         }
 
-        public void Update(Category category)
+        public void Update(Category par)
         {
-            _categoryDal.Update(category);
+            _categoryDal.Update(par);
         }
     }
 }
