@@ -7,21 +7,12 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
 {
-    [AllowAnonymous]
-    public class WriterController : Controller
+    public class DashboardController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
-        }      
-        public PartialViewResult WriterNavbar()
-        {
-            return PartialView();
-        }
-
-        public PartialViewResult WriterFooter()
-        {
-            return PartialView();
         }
     }
 }
