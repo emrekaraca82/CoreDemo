@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {
-    public class EfAboutDal: GenericRepositoryBase<About,Context>, IAboutDal
+    public class EfNotificationDal: GenericRepositoryBase<Notification, Context>, INotificationDal
     {
-
     }
 }
