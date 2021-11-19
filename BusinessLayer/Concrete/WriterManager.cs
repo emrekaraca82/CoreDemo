@@ -43,6 +43,11 @@ namespace BusinessLayer.Concrete
             return _writerDal.List(x => x.WriterId == id);
         }
 
+        public List<Writer> GetByFilter(string par)
+        {
+            return _writerDal.List(x => x.WriterEmail == par);
+        }
+
         public void Update(Writer par)
         {
             _writerDal.Update(par);

@@ -11,10 +11,12 @@ namespace CoreDemo.ViewComponents.Writer
    
     public class WriterAboutOnDashboard:ViewComponent
     {
-        WriterManager vm = new WriterManager(new EfWriterDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
         public IViewComponentResult Invoke()
         {
-            var values = vm.GetWriterById(1);
+            var usermail = User.Identity.Name;
+            var writerID = wm.GetByFilter(usermail).Select(y => y.WriterId).FirstOrDefault();
+            var values = wm.GetWriterById(writerID);
             return View(values);
         }
     }

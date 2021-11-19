@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
 {
-    [AllowAnonymous]
     public class DashboardController : Controller
     {     
         BlogManager bm = new BlogManager(new EfBlogDal());

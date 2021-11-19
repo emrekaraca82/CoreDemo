@@ -18,16 +18,16 @@
 <tr>
     <td>@item.BlogId</td>
     <td>@item.BlogTitle</td>
-    <td>@item.CreateDate.ToShortDateString()</td>
+    <td>@(((DateTime)item.CreateDate).ToString("dd-MMM-yyyy")) </td>
     <td>@item.Category.CategoryName</td>
     <td>
         @if (item.BlogStatus)
-        {          
+        {
             <span class="badge badge-success">Aktif</span>
         }
         else
         {
-    <span class="badge badge-danger">Pasif</span>
+            <span class="badge badge-danger">Pasif</span>
         }
     </td>
     <td><a href="/Blog/BlogDelete/@item.BlogId" class="btn btn-danger">Sil</a></td>
