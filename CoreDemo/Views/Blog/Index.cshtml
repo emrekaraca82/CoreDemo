@@ -15,8 +15,8 @@
                     @foreach (var item in Model)   
                     {
                     <div class="col-lg-4 card">
-                        <a href="single.html">
-                            <img src="~/CoreBlogTema/@item.BlogImage" class="card-img-top img-fluid" alt="">
+                        <a href="/Blog/BlogDetails/@item.BlogId/">
+                            <img src="~/CoreBlogTema/@item.BlogImage" class="card-img-top img-fluid" alt="@item.BlogTitle">
                         </a>
                         <div class="card-body">
                             <ul class="blog-icons my-4">

@@ -13,21 +13,27 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
-{   
+{
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm = new BlogManager(new EfBlogDal());
         WriterManager wm = new WriterManager(new EfWriterDal());
+        CommentManager cm = new CommentManager(new EfCommentDal());
         public IActionResult Index()
         {          
             var blogList = bm.GetBlogListWithCategory();         
             return View(blogList);
         }
+
         public IActionResult BlogDetails(int id)
         {
+            var values = bm.GetBlogByID(id);
+            var commentCount = cm.GetAll(id).Count;
 
             ViewBag.id = id;
-            var values = bm.GetBlogByID(id);
+            ViewBag.cCount = commentCount;  
+            
             return View(values);
         }
 

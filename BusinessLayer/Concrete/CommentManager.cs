@@ -27,5 +27,6 @@ namespace BusinessLayer.Concrete
         {
             return _commentDal.List(x => x.BlogId == id);
         }
+       
     }
 }

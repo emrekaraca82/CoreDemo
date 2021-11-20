@@ -22,8 +22,7 @@ namespace CoreDemo.Controllers
         public IActionResult Index()
         {
             var usermail = User.Identity.Name;
-            var writerName = wm.GetByFilter(usermail).Select(y => y.WriterName).FirstOrDefault();       
-            ViewBag.vname = writerName;
+            var writerName = wm.GetByFilter(usermail).Select(y => y.WriterName).FirstOrDefault();                  
             return View();
         }
 

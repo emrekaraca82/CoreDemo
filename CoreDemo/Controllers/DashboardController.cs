@@ -13,11 +13,22 @@ namespace CoreDemo.Controllers
     {     
         BlogManager bm = new BlogManager(new EfBlogDal());
         CategoryManager cm = new CategoryManager(new EfCategoryDal());
+        WriterManager wm = new WriterManager(new EfWriterDal());
         public IActionResult Index()
         {
+            var usermail = User.Identity.Name;
+            var writerID = wm.GetByFilter(usermail).Select(y => y.WriterId).FirstOrDefault();
+            var writer = wm.GetByFilter(usermail).Select(y => new
+            {
+                writerName = y.WriterName,
+                writerImage = y.WriterImage            
+            }).FirstOrDefault();
+        
             ViewBag.ToplamBlogSayisi = bm.GetAll().Count();
-            ViewBag.YazarinBlogSayisi = bm.GetBlogListByWriter(1).Count();
+            ViewBag.YazarinBlogSayisi = bm.GetBlogListByWriter(writerID).Count();
             ViewBag.KategoriSayisi = cm.GetAll().Count();
+            ViewBag.vname = writer.writerName;
+            ViewBag.vimage = writer.writerImage;
             return View();
         }
     }
