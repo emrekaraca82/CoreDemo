@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartDiv" style="width:800px; height:600px;"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+     
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(DrawonLoad);
+
+    function DrawonLoad() {
+
+        $(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Admin/Chart/CategoryChart/',
+                success: function (chartsdata) {
+
+                    var jsonData = chartsdata.jsonlist;
+                    var data = new google.visualization.DataTable();
+
+                    data.addColumn('string', 'categoryName');
+                    data.addColumn('number', 'categoryCount');
+
+                    for (var i = 0; i < jsonData.length; i++) {
+                        data.addRow([jsonData[i].categoryName, jsonData[i].categoryCount]);
+                    }
+                    var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
+
+                    chart.draw(data, {
+                        title: "Kategori Blog Sayısı",
+                        position: "top",
+                        fontSize: "16"
+                    });
+
+                }
+            });
+        })
+
+    }
+</script>
