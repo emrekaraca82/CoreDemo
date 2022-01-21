@@ -9,6 +9,7 @@
 <button type="button" id="btngetbyid" class="btn btn-outline-warning">Yazar Getir</button>
 <button type="button" id="btnaddwriter" class="btn btn-outline-success">Yazar Ekle</button>
 <button type="button" id="btndeletewriter" class="btn btn-outline-danger">Yazar Sil</button>
+<button type="button" id="btnupdatewriter" class="btn btn-outline-warning">Yazar Güncelle</button>
 <br />
 <br />
 
@@ -88,6 +89,21 @@
                 data: { writerid: id },
                 success: function (res) {               
                     alert("Kayıt Silindi");
+                }
+            });
+        });
+
+        $("#btnupdatewriter").click(x => {
+            let values = {
+                ID: $("#txtwriterid").val(),
+                Name: $("#txtwritername").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/Writer/UpdateWriter/",
+                data: values,
+                success: function (res) {
+                    alert("Kayıt Güncellendi");
                 }
             });
         });
